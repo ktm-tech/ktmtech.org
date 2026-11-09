@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>KTM Tech — Precision Engineering, Digital Excellence</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Favicon — vector mark, official PNG retained as legacy fallback -->
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="alternate icon" type="image/png" href="images/KTM_TECH_LOGO.png">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href = "styles.css" rel = "stylesheet" type = "text/css">
+</head>
+<body>
+
+<!-- ============================================================
+DEFERRED SVG FILTERS AND GRADIENTS
+============================================================ -->
+<svg style="position:absolute;width:0;height:0;" aria-hidden="true">
+  <defs>
+    <linearGradient id="navGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#26C4E7" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#209AF4" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#1B7DF0" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="circuitGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#26C4E7"/>
+      <stop offset="50%" stop-color="#209AF4"/>
+      <stop offset="100%" stop-color="#1B7DF0"/>
+    </linearGradient>
+    <!-- Bloom for the electric charge that runs through the KTM traces -->
+    <filter id="chargeGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+</svg>
+
+<!-- ============================================================
+NAVIGATION
+============================================================ -->
+<nav>
+  <a href="#home" class="logo-container" aria-label="KTM Tech — Back to top">
+    <img class="nav-logo" src="images/KTM_TECH_LOGO_2.png" alt="KTM Tech Logo" width="1254" height="1254" decoding="async">
+  </a>
+
+  <div class="nav-links" id="navLinks">
+    <a href="#home">Home</a>
+    <a href="#services">Services</a>
+    <a href="#booking">Bookings</a>
+    <a href="#auth">Login</a>
+    <button class="nav-cta" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Get Started</button>
+  </div>
+
+  <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <!-- Animated circuit trace under nav — PCB-style -->
+  <div class="nav-circuit-line">
+    <svg viewBox="0 0 1200 2" preserveAspectRatio="none" aria-hidden="true">
+      <path class="circuit-path" d="M0 1 L100 1 L120 1 L150 0 L180 1 L250 1 L300 0 L350 1 L450 1 L500 0 L550 1 L650 1 L700 0 L750 1 L850 1 L900 0 L950 1 L1050 1 L1100 0 L1150 1 L1200 1" stroke="url(#navGrad)" stroke-width="1.5" fill="none"/>
+      <!-- Circular connection nodes -->
+      <circle cx="120" cy="1" r="2" fill="#209AF4" opacity="0.5"/>
+      <circle cx="300" cy="0" r="2" fill="#209AF4" opacity="0.5"/>
+      <circle cx="500" cy="0" r="2" fill="#209AF4" opacity="0.5"/>
+      <circle cx="700" cy="0" r="2" fill="#209AF4" opacity="0.5"/>
+      <circle cx="900" cy="0" r="2" fill="#209AF4" opacity="0.5"/>
+      <circle cx="1100" cy="0" r="2" fill="#209AF4" opacity="0.5"/>
+    </svg>
+  </div>
+</nav>
+
+<!-- ============================================================
+HERO SECTION — Circuit blueprint background
+============================================================ -->
+<section id="home" class="hero">
+  <!-- Oversized low-opacity circuit traces — matching KTM logo style -->
+  <div class="circuit-bg" aria-hidden="true">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <!-- Main vertical traces — 45° & 90° angles, consistent stroke width -->
+      <path d="M200 0 L200 200 L200 250 L180 280 L180 350 L200 380 L200 500 L200 550 L220 580 L220 650 L200 680 L200 900" stroke="url(#circuitGrad)" stroke-width="2" fill="none" opacity="0.5"/>
+      <path d="M600 0 L600 100 L580 130 L580 200 L600 230 L600 350 L620 380 L620 450 L600 480 L600 550 L580 580 L580 650 L600 680 L600 900" stroke="url(#circuitGrad)" stroke-width="2" fill="none" opacity="0.4"/>
+      <path d="M1000 0 L1000 150 L1020 180 L1020 250 L1000 280 L1000 400 L980 430 L980 500 L1000 530 L1000 650 L1020 680 L1020 750 L1000 780 L1000 900" stroke="url(#circuitGrad)" stroke-width="2" fill="none" opacity="0.35"/>
+      <path d="M1300 0 L1300 80 L1280 110 L1280 180 L1300 210 L1300 320 L1320 350 L1320 420 L1300 450 L1300 550 L1280 580 L1280 650 L1300 680 L1300 900" stroke="url(#circuitGrad)" stroke-width="2" fill="none" opacity="0.3"/>
+      <!-- Horizontal crossing traces -->
+      <path d="M0 200 L200 200 L300 180 L400 180 L500 200 L600 200" stroke="url(#circuitGrad)" stroke-width="2" fill="none" opacity="0.4"/>
+      <path d="M800 350 L900 350 L950 330 L1050 330 L1100 350 L1200 350" stroke="url(#circuitGrad)" stroke-width="2" fill="none" opacity="0.35"/>
+      <path d="M100 550 L200 550 L250 530 L350 530 L400 550 L500 550" stroke="url(#circuitGrad)" stroke-width="2" fill="none" opacity="0.3"/>
+      <path d="M900 680 L1000 680 L1050 660 L1150 660 L1200 680 L1300 680" stroke="url(#circuitGrad)" stroke-width="2" fill="none" opacity="0.25"/>
+      <!-- Diagonal traces — 45° angles -->
+      <path d="M200 250 L250 200 L300 200 L320 180" stroke="url(#circuitGrad)" stroke-width="2" fill="none" opacity="0.35"/>
+      <path d="M580 130 L620 100 L650 100 L680 80" stroke="url(#circuitGrad)" stroke-width="2" fill="none" opacity="0.3"/>
+      <path d="M1020 180 L1050 150 L1080 150 L1100 130" stroke="url(#circuitGrad)" stroke-width="2" fill="none" opacity="0.3"/>
+      <path d="M220 580 L250 550 L280 550 L300 530" stroke="url(#circuitGrad)" stroke-width="2" fill="none" opacity="0.25"/>
+      <path d="M980 430 L950 400 L920 400 L900 380" stroke="url(#circuitGrad)" stroke-width="2" fill="none" opacity="0.25"/>
+      <!-- Circular connection nodes — pulsing softly with brand blue glow -->
+      <circle cx="200" cy="200" r="4" fill="#209AF4" opacity="0.5"/>
+      <circle cx="580" cy="130" r="4" fill="#209AF4" opacity="0.5"/>
+      <circle cx="1020" cy="180" r="4" fill="#209AF4" opacity="0.5"/>
+      <circle cx="200" cy="250" r="4" fill="#209AF4" opacity="0.5"/>
+      <circle cx="580" cy="200" r="4" fill="#209AF4" opacity="0.5"/>
+      <circle cx="1000" cy="280" r="4" fill="#209AF4" opacity="0.5"/>
+      <circle cx="200" cy="380" r="4" fill="#209AF4" opacity="0.5"/>
+      <circle cx="600" cy="350" r="4" fill="#209AF4" opacity="0.5"/>
+      <circle cx="1000" cy="530" r="4" fill="#209AF4" opacity="0.5"/>
+      <circle cx="1300" cy="210" r="4" fill="#209AF4" opacity="0.5"/>
+      <circle cx="300" cy="180" r="3" fill="#26C4E7" opacity="0.4"/>
+      <circle cx="950" cy="330" r="3" fill="#26C4E7" opacity="0.4"/>
+      <circle cx="250" cy="530" r="3" fill="#26C4E7" opacity="0.4"/>
+      <circle cx="1050" cy="660" r="3" fill="#26C4E7" opacity="0.4"/>
+      <circle cx="250" cy="200" r="3" fill="#1CBFF3" opacity="0.4"/>
+      <circle cx="1050" cy="150" r="3" fill="#1CBFF3" opacity="0.4"/>
+    </svg>
+  </div>
+
+  <!-- Futuristic light sweep across the hero -->
+  <div class="hero-scan" aria-hidden="true"></div>
+
+  <!-- Brand watermark — KTM_TECH_LOGO_2.png layered over the existing background -->
+  <div class="hero-logo-bg" aria-hidden="true"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      KTM Tech — Precision Engineering
+    </div>
+
+    <h1>
+      Build. Secure.<br>
+      <span class="gradient-text">Scale.</span>
+    </h1>
+
+    <p>
+      Building The Future, One System at a Time.<br><br>
+      We Specialize in Crafting Robust, Scalable, and Secure Digital Solutions for Businesses of All Sizes.
+    </p>
+
+    <div class="hero-actions">
+      <button class="btn-primary btn-circuit" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">
+        Start Your Project
+        <!-- Circuit-inspired border SVG — draws on hover -->
+        <svg viewBox="0 0 200 52" preserveAspectRatio="none" aria-hidden="true">
+          <rect x="1" y="1" width="198" height="50" rx="2" ry="2" stroke="url(#circuitGrad)" stroke-width="1.5" fill="none" stroke-dasharray="400" stroke-dashoffset="0"/>
+          <circle cx="15" cy="26" r="3" fill="#209AF4" opacity="0.6"/>
+          <circle cx="185" cy="26" r="3" fill="#209AF4" opacity="0.6"/>
+        </svg>
+      </button>
+      <button class="btn-secondary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Explore Services</button>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+CIRCUIT DIVIDER — PCB traces as section separator
+============================================================ -->
+<div class="circuit-divider" aria-hidden="true">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+    <path d="M0 40 L200 40 L220 30 L260 30 L280 40 L400 40 L450 20 L500 20 L550 40 L700 40 L720 30 L760 30 L780 40 L900 40 L950 60 L1000 60 L1050 40 L1200 40 L1250 20 L1300 20 L1350 40 L1440 40" stroke="url(#circuitGrad)" stroke-width="1.5" fill="none" opacity="0.6"/>
+    <path d="M0 50 L150 50 L180 60 L220 60 L250 50 L380 50 L420 40 L480 40 L520 50 L680 50 L710 60 L750 60 L780 50 L920 50 L960 40 L1020 40 L1060 50 L1180 50 L1210 60 L1260 60 L1300 50 L1440 50" stroke="url(#circuitGrad)" stroke-width="1" fill="none" opacity="0.3"/>
+    <!-- Nodes at intersections -->
+    <circle cx="280" cy="40" r="3" fill="#209AF4" opacity="0.5"/>
+    <circle cx="550" cy="40" r="3" fill="#209AF4" opacity="0.5"/>
+    <circle cx="780" cy="40" r="3" fill="#209AF4" opacity="0.5"/>
+    <circle cx="1050" cy="40" r="3" fill="#209AF4" opacity="0.5"/>
+    <circle cx="1350" cy="40" r="3" fill="#209AF4" opacity="0.5"/>
+  </svg>
+</div>
+
+<!-- ============================================================
+SERVICES SECTION — Feature cards with circuit corners
+============================================================ -->
+<section id="services" class="section">
+  <div class="section-header fade-in">
+    <span class="circuit-node"></span>
+    <h2>Expert Engineering Services</h2>
+    <p>From concept to deployment — we deliver precision-engineered digital solutions tailored to your business.</p>
+  </div>
+
+  <div class="services-grid">
+    <!-- Card 1: Web Development -->
+    <div class="feature-card fade-in">
+      <div class="circuit-corner circuit-corner-tl">
+        <svg viewBox="0 0 56 56" aria-hidden="true">
+          <path d="M0 0 L0 36 L10 46 L10 56" stroke="url(#circuitGrad)" stroke-width="1.5" fill="none"/>
+          <path d="M0 18 L18 18 L28 8 L56 8" stroke="url(#circuitGrad)" stroke-width="1.5" fill="none"/>
+          <circle cx="10" cy="56" r="2.5" fill="#209AF4"/>
+          <circle cx="56" cy="8" r="2.5" fill="#209AF4"/>
+        </svg>
+      </div>
+      <div class="card-circuit-hover">
+        <svg viewBox="0 0 80 80" aria-hidden="true">
+          <path d="M80 80 L80 40 L70 30 L70 10 L60 0" stroke="url(#circuitGrad)" stroke-width="1" fill="none" opacity="0.5"/>
+          <path d="M80 50 L60 30 L40 30 L30 20" stroke="url(#circuitGrad)" stroke-width="1" fill="none" opacity="0.3"/>
+          <circle cx="60" cy="0" r="2" fill="#209AF4"/>
+          <circle cx="30" cy="20" r="2" fill="#209AF4"/>
+        </svg>
+      </div>
+      <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div>
+      <h3>Web Development</h3>
+      <p>Custom websites built to your exact specifications. Choose to rent or buy — flexible solutions for every business scale.</p>
+    </div>
+
+    <!-- Card 2: Troubleshooting -->
+    <div class="feature-card fade-in">
+      <div class="circuit-corner circuit-corner-tl">
+        <svg viewBox="0 0 56 56" aria-hidden="true">
+          <path d="M0 0 L0 36 L10 46 L10 56" stroke="url(#circuitGrad)" stroke-width="1.5" fill="none"/>
+          <path d="M0 18 L18 18 L28 8 L56 8" stroke="url(#circuitGrad)" stroke-width="1.5" fill="none"/>
+          <circle cx="10" cy="56" r="2.5" fill="#209AF4"/>
+          <circle cx="56" cy="8" r="2.5" fill="#209AF4"/>
+        </svg>
+      </div>
+      <div class="card-circuit-hover">
+        <svg viewBox="0 0 80 80" aria-hidden="true">
+          <path d="M80 80 L80 40 L70 30 L70 10 L60 0" stroke="url(#circuitGrad)" stroke-width="1" fill="none" opacity="0.5"/>
+          <path d="M80 50 L60 30 L40 30 L30 20" stroke="url(#circuitGrad)" stroke-width="1" fill="none" opacity="0.3"/>
+          <circle cx="60" cy="0" r="2" fill="#209AF4"/>
+          <circle cx="30" cy="20" r="2" fill="#209AF4"/>
+        </svg>
+      </div>
+      <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+      <h3>Troubleshooting</h3>
+      <p>Diagnose and resolve software, system, and network issues with precision. Fast turnaround, reliable results.</p>
+    </div>
+
+    <!-- Card 3: Tech Consulting -->
+    <div class="feature-card fade-in">
+      <div class="circuit-corner circuit-corner-tl">
+        <svg viewBox="0 0 56 56" aria-hidden="true">
+          <path d="M0 0 L0 36 L10 46 L10 56" stroke="url(#circuitGrad)" stroke-width="1.5" fill="none"/>
+          <path d="M0 18 L18 18 L28 8 L56 8" stroke="url(#circuitGrad)" stroke-width="1.5" fill="none"/>
+          <circle cx="10" cy="56" r="2.5" fill="#209AF4"/>
+          <circle cx="56" cy="8" r="2.5" fill="#209AF4"/>
+        </svg>
+      </div>
+      <div class="card-circuit-hover">
+        <svg viewBox="0 0 80 80" aria-hidden="true">
+          <path d="M80 80 L80 40 L70 30 L70 10 L60 0" stroke="url(#circuitGrad)" stroke-width="1" fill="none" opacity="0.5"/>
+          <path d="M80 50 L60 30 L40 30 L30 20" stroke="url(#circuitGrad)" stroke-width="1" fill="none" opacity="0.3"/>
+          <circle cx="60" cy="0" r="2" fill="#209AF4"/>
+          <circle cx="30" cy="20" r="2" fill="#209AF4"/>
+        </svg>
+      </div>
+      <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg></div>
+      <h3>Tech Consulting</h3>
+      <p>Strategic technology consulting to optimize, secure, and scale your systems. Engineering-grade advice for your business.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+CIRCUIT DIVIDER
+============================================================ -->
+<div class="circuit-divider" aria-hidden="true">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+    <path d="M0 40 L200 40 L220 50 L260 50 L280 40 L400 40 L450 20 L500 20 L550 40 L700 40 L720 50 L760 50 L780 40 L900 40 L950 60 L1000 60 L1050 40 L1200 40 L1250 20 L1300 20 L1350 40 L1440 40" stroke="url(#circuitGrad)" stroke-width="1.5" fill="none" opacity="0.4"/>
+    <circle cx="280" cy="40" r="3" fill="#209AF4" opacity="0.4"/>
+    <circle cx="550" cy="40" r="3" fill="#209AF4" opacity="0.4"/>
+    <circle cx="780" cy="40" r="3" fill="#209AF4" opacity="0.4"/>
+    <circle cx="1050" cy="40" r="3" fill="#209AF4" opacity="0.4"/>
+    <circle cx="1350" cy="40" r="3" fill="#209AF4" opacity="0.4"/>
+  </svg>
+</div>
+
+<!-- ============================================================
+LOGIN / REGISTER SECTION — Glassmorphism card
+============================================================ -->
+<section id="auth" class="auth-section">
+  <div class="section-header fade-in">
+    <span class="circuit-node"></span>
+    <h2>Client Portal</h2>
+    <p>Sign in to manage your bookings, track projects, and access subscriber benefits.</p>
+  </div>
+
+  <div class="auth-container">
+    <h2>Welcome</h2>
+    <p>Sign in or create your account to get started</p>
+
+    <input id="email" class="auth-input" type="email" placeholder="Email address" autocomplete="email">
+    <input id="password" class="auth-input" type="password" placeholder="Password" autocomplete="current-password">
+
+    <div class="auth-actions">
+      <button class="btn-primary" onclick="register()">Create Account</button>
+      <button class="btn-secondary" onclick="login()">Sign In</button>
+      <button class="btn-secondary" onclick="logout()" style="flex:0.5; min-width:80px;">Sign Out</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+CIRCUIT DIVIDER
+============================================================ -->
+<div class="circuit-divider" aria-hidden="true">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+    <path d="M0 40 L200 40 L220 30 L260 30 L280 40 L400 40 L450 60 L500 60 L550 40 L700 40 L720 30 L760 30 L780 40 L900 40 L950 20 L1000 20 L1050 40 L1200 40 L1250 60 L1300 60 L1350 40 L1440 40" stroke="url(#circuitGrad)" stroke-width="1.5" fill="none" opacity="0.5"/>
+    <circle cx="280" cy="40" r="3" fill="#209AF4" opacity="0.5"/>
+    <circle cx="550" cy="40" r="3" fill="#209AF4" opacity="0.5"/>
+    <circle cx="780" cy="40" r="3" fill="#209AF4" opacity="0.5"/>
+    <circle cx="1050" cy="40" r="3" fill="#209AF4" opacity="0.5"/>
+    <circle cx="1350" cy="40" r="3" fill="#209AF4" opacity="0.5"/>
+  </svg>
+</div>
+
+<!-- ============================================================
+BOOKING SECTION — Service configuration with price calculator
+============================================================ -->
+<section id="booking" class="booking-section">
+  <div class="section-header fade-in">
+    <span class="circuit-node"></span>
+    <h2>Tell Us What You Need</h2>
+    <p>Ask a question, request a quote, or book a service — one simple form. No commitment required.</p>
+  </div>
+
+  <div class="lead-container fade-in">
+    <h2 id="leadFormTitle">Send Your Enquiry</h2>
+    <p class="lead-subtitle">Tell us what you need, and we'll help you with the next step.</p>
+    <form id="leadForm" action="https://formspree.io/f/mvzelvpj" method="POST" novalidate>
+      <fieldset class="lead-step">
+        <legend class="lead-step-legend" style="padding:0 8px;"><span class="step-num">1</span> What can we help with?</legend>
+        <p class="lead-hint">Choose closest match. Extra questions appear only when relevant.</p>
+        <label for="leadService" style="position:absolute;left:-9999px;">What KTM Tech can help with</label>
+        <select id="leadService" name="service" class="form-select" required>
+          <option value="">Select an option…</option>
+          <option value="website-development">Website Development</option>
+          <option value="website-redesign">Website Redesign</option>
+          <option value="web-application">Web Application / System</option>
+          <option value="repair">Computer / Laptop Repair</option>
+          <option value="it-support">IT / Technical Support</option>
+          <option value="business-tech">Business Technology</option>
+          <option value="quote">Request a Quote</option>
+          <option value="general">General Enquiry</option>
+          <option value="other">Other</option>
+        </select>
+        <div class="field-error" id="err-leadService">Please choose what we can help you with.</div>
+        <div class="lead-hint" style="margin-top:14px;">What should happen next?</div>
+        <div class="intent-row" role="radiogroup" aria-label="Intent">
+          <label class="intent-card selected"><input type="radio" name="intent" value="enquiry" checked><strong>Ask</strong><span>General enquiry</span></label>
+          <label class="intent-card"><input type="radio" name="intent" value="quote"><strong>Quote</strong><span>Pricing request</span></label>
+          <label class="intent-card"><input type="radio" name="intent" value="booking"><strong>Book</strong><span>Appointment</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="lead-step">
+        <legend class="lead-step-legend" style="padding:0 8px;"><span class="step-num">2</span> Your contact details</legend>
+        <div class="form-row">
+          <div class="form-group"><label for="leadName">Full Name <span class="required">*</span></label><input id="leadName" name="name" type="text" class="form-input" placeholder="e.g. Thabo Mokoena" autocomplete="name" required maxlength="80"><div class="field-error" id="err-leadName">Please enter your full name.</div></div>
+          <div class="form-group"><label for="leadBusiness">Company (optional)</label><input id="leadBusiness" name="company" type="text" class="form-input" placeholder="Business name" autocomplete="organization" maxlength="100"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label for="leadEmail">Email <span class="required">*</span></label><input id="leadEmail" name="email" type="email" class="form-input" placeholder="you@example.com" autocomplete="email" required maxlength="120"><div class="field-error" id="err-leadEmail">Enter a valid email.</div></div>
+          <div class="form-group"><label for="leadPhone">Phone / WhatsApp <span class="required">*</span></label><input id="leadPhone" name="phone" type="tel" class="form-input" placeholder="+27 67 864 1328" autocomplete="tel" required maxlength="25"><div class="field-error" id="err-leadPhone">Enter valid number (7-15 digits).</div></div>
+        </div>
+        <div class="form-group"><label>Prefer direct contact? <span class="quick-hint">Tap to reach KTM instantly — or fill the form below</span></label><div class="radio-row quick-contact-row" aria-label="Quick contact options"><a class="radio-pill quick-link selected" data-pref="whatsapp" href="https://wa.me/27678641328?text=Hi%20KTM%20Tech!%20I%20need%20help%20with..." target="_blank" rel="noopener"><span class="ql-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></span> WhatsApp <span class="ql-arrow">↗</span></a><a class="radio-pill quick-link" data-pref="phone" href="tel:+27678641328"><span class="ql-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span> Phone call <span class="ql-arrow">↗</span></a><a class="radio-pill quick-link" data-pref="email" href="mailto:ktmtech.org@gmail.com?subject=KTM%20Tech%20Enquiry&body=Hi%20KTM%20Tech,%0A%0AI%20need%20help%20with..."><span class="ql-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span> Email <span class="ql-arrow">↗</span></a><input type="hidden" name="contactPreference" id="contactPreference" value="whatsapp"></div><p class="quick-note">WhatsApp: 067 864 1328 &nbsp;•&nbsp; Email: ktmtech.org@gmail.com — replies within business hours.</p></div>
+      </fieldset>
+      <fieldset class="lead-step"><legend class="lead-step-legend" style="padding:0 8px;"><span class="step-num">3</span> Tell us what you need</legend><div class="form-group"><label for="leadSubject">Subject <span class="required">*</span></label><input id="leadSubject" name="subject" type="text" class="form-input" placeholder="Briefly tell us what you need" required maxlength="120"><div class="field-error" id="err-leadSubject">Add a short summary.</div></div><div class="form-group"><label for="leadMessage">Details <span class="required">*</span></label><textarea id="leadMessage" name="message" class="form-textarea" placeholder="Project, problem, or service you need..." required maxlength="4000"></textarea><div class="field-error" id="err-leadMessage">Describe what you need (10+ chars).</div></div><div class="form-group"><label for="leadUrgency">Urgency</label><select id="leadUrgency" name="urgency" class="form-select"><option value="not-urgent">Not urgent</option><option value="few-days">Within a few days</option><option value="week">Within a week</option><option value="asap">As soon as possible</option></select></div></fieldset>
+      <fieldset class="lead-step" id="panelWeb" hidden><legend class="lead-step-legend" style="padding:0 8px;"><span class="step-num">4</span> Website details</legend><div class="form-row"><div class="form-group"><label for="webKind">Type needed?</label><select id="webKind" name="webKind" class="form-select"><option value="">Select…</option><option>Business website</option><option>Online store</option><option>Portfolio</option><option>Booking system</option><option>Not sure</option></select></div><div class="form-group"><label for="hasWebsite">Existing website?</label><select id="hasWebsite" name="hasWebsite" class="form-select"><option value="">Select…</option><option value="no">No</option><option value="yes">Yes</option><option value="needs-redesign">Yes, needs redesign</option></select></div></div><div class="form-group" id="existingUrlWrap" hidden><label for="existingUrl">Website address (optional)</label><input id="existingUrl" name="existingUrl" type="text" class="form-input" placeholder="www.example.co.za" maxlength="150"></div><div class="form-row"><div class="form-group"><label for="webPurpose">Main purpose</label><input id="webPurpose" name="webPurpose" type="text" class="form-input" placeholder="e.g. get customers" maxlength="150"></div><div class="form-group"><label for="webDeadline">Deadline (optional)</label><input id="webDeadline" name="deadline" type="date" class="form-input"></div></div><div class="form-group"><label for="webBudget">Budget (optional)</label><select id="webBudget" name="budget" class="form-select"><option value="">Prefer not to say</option><option>Under R3,000</option><option>R3,000 – R8,000</option><option>R8,000 – R20,000</option><option>R20,000+</option></select></div></fieldset>
+      <fieldset class="lead-step" id="panelRepair" hidden><legend class="lead-step-legend" style="padding:0 8px;"><span class="step-num">4</span> Device details</legend><div class="form-row"><div class="form-group"><label for="deviceType">Device type</label><select id="deviceType" name="deviceType" class="form-select"><option value="">Select…</option><option>Laptop</option><option>Desktop</option><option>All-in-one</option><option>Other</option></select></div><div class="form-group"><label for="deviceBrand">Brand</label><input id="deviceBrand" name="deviceBrand" type="text" class="form-input" placeholder="HP, Dell..." maxlength="60"></div></div><div class="form-row"><div class="form-group"><label for="deviceModel">Model (if known)</label><input id="deviceModel" name="deviceModel" type="text" class="form-input" maxlength="80"></div><div class="form-group"><label for="problemStart">When started?</label><select id="problemStart" name="problemStart" class="form-select"><option value="">Select…</option><option>Today</option><option>This week</option><option>Over a week</option><option>Not sure</option></select></div></div><div class="form-row"><div class="form-group"><label for="deviceUsable">Usable?</label><select id="deviceUsable" name="deviceUsable" class="form-select"><option value="">Select…</option><option value="yes">Yes</option><option value="partially">Partially</option><option value="no">No</option></select></div><div class="form-group"><label for="repairMethod">Service method</label><select id="repairMethod" name="repairMethod" class="form-select"><option value="">Select…</option><option value="at-ktm">At KTM Tech</option><option value="onsite">On-site</option><option value="remote">Remote</option><option value="not-sure">Not sure</option></select></div></div></fieldset>
+      <fieldset class="lead-step" id="panelSupport" hidden><legend class="lead-step-legend" style="padding:0 8px;"><span class="step-num">4</span> Support details</legend><div class="form-row"><div class="form-group"><label for="issueType">Issue type</label><select id="issueType" name="issueType" class="form-select"><option value="">Select…</option><option>Software problem</option><option>Network</option><option>Virus / slow</option><option>Email / accounts</option><option>Business system</option><option>Other</option></select></div><div class="form-group"><label for="systemAffected">System affected</label><input id="systemAffected" name="systemAffected" type="text" class="form-input" placeholder="e.g. office laptop" maxlength="120"></div></div></fieldset>
+      <fieldset class="lead-step" id="panelBooking" hidden><legend class="lead-step-legend" style="padding:0 8px;"><span class="step-num">5</span> Booking preferences</legend><p class="lead-hint">Request only — confirmed after review.</p><div class="form-group"><label style="display:flex;gap:10px;align-items:center;cursor:pointer;text-transform:none;letter-spacing:0;font-size:0.9rem;color:var(--text-primary);"><input type="checkbox" id="wantBooking" name="wantBooking" value="yes" style="width:18px;height:18px;accent-color:#209AF4;"> I want a specific date / appointment</label></div><div id="bookingFields" hidden><div class="form-row"><div class="form-group"><label for="prefDate">Preferred date</label><input id="prefDate" name="preferredDate" type="date" class="form-input"></div><div class="form-group"><label for="prefTime">Preferred time</label><select id="prefTime" name="preferredTime" class="form-select"><option value="">Select…</option><option value="morning">Morning (08-11)</option><option value="midday">Midday (11-14)</option><option value="afternoon">Afternoon (14-17)</option></select></div></div><div class="form-group"><label for="serviceMethod">Service method</label><select id="serviceMethod" name="serviceMethod" class="form-select"><option value="">Select…</option><option value="at-ktm">At KTM Tech</option><option value="onsite">On-site</option><option value="remote">Remote</option><option value="not-sure">Not sure</option></select></div></div><div class="form-row"><div class="form-group"><label for="legacyService">Estimate service</label><select id="legacyService" name="legacyService" class="form-select"><option value="">No estimate</option><option value="web">Web Development</option><option value="fix">Troubleshooting</option><option value="consult">Consulting</option></select></div><div class="form-group"><label for="legacyTimeline">Timeline</label><select id="legacyTimeline" name="timeline" class="form-select"><option value="normal">Normal</option><option value="urgent">Urgent (1.5x)</option></select></div></div><div class="form-row"><div class="form-group"><label for="legacyPlan">Plan (web)</label><select id="legacyPlan" name="plan" class="form-select"><option value="">N/A</option><option value="rent">Rent R500/mo</option><option value="buy">Buy R3,000</option></select></div><div class="form-group"><label for="legacyComplexity">Complexity</label><select id="legacyComplexity" name="complexity" class="form-select"><option value="">Select…</option><option value="basic">Basic</option><option value="standard">Standard</option><option value="advanced">Advanced</option></select></div></div><div class="price-display" id="leadPriceWrap" hidden><h3 id="leadPrice">Estimated Price: R0</h3><p>Estimate only — confirmed at consultation.</p></div></fieldset>
+      <div class="hp-field" aria-hidden="true"><label>Leave empty<input type="text" id="leadHp" name="company_hp" tabindex="-1" autocomplete="off"></label></div><input type="hidden" name="_subject" id="formspreeSubject" value="New KTM Tech enquiry"><div class="form-submit-wrap"><button type="submit" class="form-submit-btn" id="leadSubmitBtn">Send My Enquiry →</button></div><p class="lead-hint" style="text-align:center;margin-top:12px;">Quote requests are commitment-free.</p></form><div class="lead-success" id="leadSuccess" hidden role="status" aria-live="polite"><div class="success-icon">✓</div><h3>We've received your enquiry.</h3><p>Thank you for contacting KTM Tech. We'll respond via your preferred method.</p><p id="leadBookingNote" hidden><strong>Booking request received</strong> — not yet confirmed until we reply.</p><span class="lead-ref" id="leadRef"></span><div style="margin-top:18px;"><button type="button" id="leadNewBtn" style="padding:12px 22px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text-primary);cursor:pointer;">Send another enquiry</button></div></div></div>
+</section>
+
+<!-- ============================================================
+CIRCUIT DIVIDER
+============================================================ -->
+<div class="circuit-divider" aria-hidden="true">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+    <path d="M0 40 L200 40 L220 50 L260 50 L280 40 L400 40 L450 20 L500 20 L550 40 L700 40 L720 50 L760 50 L780 40 L900 40 L950 60 L1000 60 L1050 40 L1200 40 L1250 20 L1300 20 L1350 40 L1440 40" stroke="url(#circuitGrad)" stroke-width="1.5" fill="none" opacity="0.35"/>
+    <circle cx="280" cy="40" r="3" fill="#209AF4" opacity="0.35"/>
+    <circle cx="550" cy="40" r="3" fill="#209AF4" opacity="0.35"/>
+    <circle cx="780" cy="40" r="3" fill="#209AF4" opacity="0.35"/>
+    <circle cx="1050" cy="40" r="3" fill="#209AF4" opacity="0.35"/>
+    <circle cx="1350" cy="40" r="3" fill="#209AF4" opacity="0.35"/>
+  </svg>
+</div>
+
+<!-- ============================================================
+ADMIN DASHBOARD — Hidden by default, shown when admin logs in
+============================================================ -->
+<section id="adminPanel" style="display:none;" class="admin-section">
+  <div class="admin-container">
+    <div class="section-header fade-in">
+      <span class="circuit-node"></span>
+      <h2>Admin Dashboard</h2>
+      <p>Manage leads: enquiries, quotes, and booking requests in real-time. Old bookings remain readable.</p>
+    </div>
+
+    <div id="bookingsContainer" class="bookings-grid"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+CIRCUIT DIVIDER
+============================================================ -->
+<div class="circuit-divider" aria-hidden="true">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+    <path d="M0 40 L200 40 L220 50 L260 50 L280 40 L400 40 L450 20 L500 20 L550 40 L700 40 L720 50 L760 50 L780 40 L900 40 L950 60 L1000 60 L1050 40 L1200 40 L1250 20 L1300 20 L1350 40 L1440 40" stroke="url(#circuitGrad)" stroke-width="1.5" fill="none" opacity="0.4"/>
+    <circle cx="280" cy="40" r="3" fill="#209AF4" opacity="0.4"/>
+    <circle cx="550" cy="40" r="3" fill="#209AF4" opacity="0.4"/>
+    <circle cx="780" cy="40" r="3" fill="#209AF4" opacity="0.4"/>
+    <circle cx="1050" cy="40" r="3" fill="#209AF4" opacity="0.4"/>
+    <circle cx="1350" cy="40" r="3" fill="#209AF4" opacity="0.4"/>
+  </svg>
+</div>
+
+
+
+<!-- ============================================================
+FOOTER — Circuit traces flowing into the bottom
+============================================================ -->
+<footer>
+  <!-- Circuit traces flowing into footer -->
+  <div class="footer-circuit" aria-hidden="true">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+      <path d="M0 30 L150 30 L180 20 L220 20 L250 30 L400 30 L430 40 L480 40 L520 30 L700 30 L730 20 L770 20 L800 30 L950 30 L980 40 L1030 40 L1070 30 L1250 30 L1280 20 L1330 20 L1370 30 L1440 30" stroke="url(#circuitGrad)" stroke-width="1.5" fill="none" opacity="0.4"/>
+      <path d="M0 40 L120 40 L150 50 L190 50 L220 40 L370 40 L400 30 L450 30 L490 40 L670 40 L700 50 L740 50 L770 40 L920 40 L950 30 L1000 30 L1040 40 L1220 40 L1250 50 L1300 50 L1340 40 L1440 40" stroke="url(#circuitGrad)" stroke-width="1" fill="none" opacity="0.2"/>
+      <circle cx="250" cy="30" r="3" fill="#209AF4" opacity="0.4"/>
+      <circle cx="520" cy="30" r="3" fill="#209AF4" opacity="0.4"/>
+      <circle cx="800" cy="30" r="3" fill="#209AF4" opacity="0.4"/>
+      <circle cx="1070" cy="30" r="3" fill="#209AF4" opacity="0.4"/>
+      <circle cx="1370" cy="30" r="3" fill="#209AF4" opacity="0.4"/>
+    </svg>
+  </div>
+
+  <div class="footer-content">
+    <div class="footer-brand">
+      <!-- Official brand mark — KTM_TECH_LOGO.png cropped to its artwork box -->
+      <img class="footer-logo" src="images/KTM_TECH_LOGO_2.png" alt="KTM Tech" width="1254" height="1254" loading="lazy" decoding="async">
+      <p>Precision engineering for the digital age. We build, secure, and scale systems that power businesses worldwide.</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="#services">Web Development</a>
+      <a href="#services">Troubleshooting</a>
+      <a href="#services">Tech Consulting</a>
+      <a href="#booking">Pricing</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">About Us</a>
+      <a href="#">Partners</a>
+      <a href="#">Careers</a>
+      <a href="#auth">Client Portal</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <a href="ktmtech.org@gmail.com">ktmtech.org</a>
+      <a href="0678641328">WhatsApp</a>
+      <a href="#">GitHub</a>
+      <a href="#">LinkedIn</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2026 KTM Tech. All rights reserved. Engineered with Precision.</p>
+    <div class="footer-social">
+      <a href="#" aria-label="GitHub">GH</a>
+      <a href="#" aria-label="LinkedIn">IN</a>
+      <a href="ktmtech.org@gmail.com" aria-label="Email">@</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+JAVASCRIPT — Firebase + Interactivity + Animations
+============================================================ -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc,
+  collection,
+  addDoc,
+  serverTimestamp,
+  onSnapshot,
+  updateDoc,
+  deleteDoc
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+/* ============================================================
+   FIREBASE CONFIGURATION
+   ============================================================ */
+const firebaseConfig = {
+  apiKey: "AIzaSyCCd59KIBrJpvr-iygJAnDORi9cERsMVWs",
+  authDomain: "ktm-tech.firebaseapp.com",
+  projectId: "ktm-tech",
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth();
+const db = getFirestore();
+
+/* ============================================================
+   MOBILE HAMBURGER MENU TOGGLE
+   ============================================================ */
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  navLinks.classList.toggle('active');
+});
+
+// Close nav when a link is clicked
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    hamburger.classList.remove('active');
+    navLinks.classList.remove('active');
+  });
+});
+
+/* ============================================================
+   SCROLL FADE-IN OBSERVER
+   ============================================================ */
+const fadeElements = document.querySelectorAll('.fade-in');
+
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+});
+
+fadeElements.forEach(el => fadeObserver.observe(el));
+
+/* ============================================================
+   REGISTER — Creates Firebase Auth account + Firestore user doc
+   ============================================================ */
+window.register = async function() {
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+
+  if (!email || !password) {
+    alert("Please enter both email and password.");
+    return;
+  }
+
+  try {
+    const userCred = await createUserWithEmailAndPassword(auth, email, password);
+    await setDoc(doc(db, "users", userCred.user.uid), {
+      email: email,
+      role: "user",
+      subscribed: false
+    });
+    alert("Account created successfully! Welcome to KTM Tech.");
+  } catch (err) {
+    alert(err.message);
+  }
+}
+
+/* ============================================================
+   LOGIN
+   ============================================================ */
+window.login = async function() {
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+
+  if (!email || !password) {
+    alert("Please enter both email and password.");
+    return;
+  }
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    alert("Welcome back to KTM Tech.");
+  } catch (err) {
+    alert(err.message);
+  }
+}
+
+/* ============================================================
+   LOGOUT
+   ============================================================ */
+window.logout = async function() {
+  await signOut(auth);
+  alert("Signed out successfully.");
+}
+
+/* ============================================================
+   AUTH STATE OBSERVER — Role Detection + UI Control
+   ============================================================ */
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    const docRef = doc(db, "users", user.uid);
+    const snap = await getDoc(docRef);
+
+    if (snap.exists()) {
+      const data = snap.data();
+      console.log("KTM Tech — Role:", data.role);
+
+      if (data.role === "admin") {
+        showAdminUI();
+      }
+
+      if (data.subscribed === true) {
+        enablePremiumUI();
+      }
+    }
+  } else {
+    console.log("KTM Tech — No user logged in");
+  }
+});
+
+// Login banner
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    console.log("KTM Tech — Logged in as:", user.email);
+    const existing = document.querySelector('.login-banner');
+    if (!existing) {
+      const banner = document.createElement('p');
+      banner.className = 'login-banner';
+      banner.style.cssText = 'text-align:center;padding:8px;font-size:0.85rem;color:#209AF4;background:rgba(32,154,244,0.06);border-bottom:1px solid rgba(42,63,99,0.2);';
+      banner.textContent = `Authenticated as ${user.email}`;
+      document.body.prepend(banner);
+    }
+  }
+});
+
+/* ============================================================
+   ADMIN UI — Show dashboard + load bookings in real-time
+   ============================================================ */
+function showAdminUI() {
+  document.getElementById("adminPanel").style.display = "block";
+  loadBookings();
+}
+function enablePremiumUI() {
+  const styleEl = document.createElement('style');
+  styleEl.textContent = `
+    .login-banner {
+      background: rgba(32, 154, 244, 0.1) !important;
+      border-bottom-color: rgba(32, 154, 244, 0.3) !important;
+    }
+    body::after {
+      box-shadow: inset 0 0 60px rgba(32, 154, 244, 0.06);
+    }
+  `;
+  document.head.appendChild(styleEl);
+  alert("Premium subscriber benefits activated.");
+}
+
+/* ============================================================
+   PRICE CALCULATOR — preserved rules, unified-form controls
+   Legacy IDs (service/plan/complexity/timeline/price) are
+   mapped to lead IDs when present. No customer-editable price.
+   ============================================================ */
+function resolvePriceInputs() {
+  const svc = document.getElementById("legacyService") || document.getElementById("service");
+  const pln = document.getElementById("legacyPlan") || document.getElementById("plan");
+  const cmp = document.getElementById("legacyComplexity") || document.getElementById("complexity");
+  const tml = document.getElementById("legacyTimeline") || document.getElementById("timeline");
+  return { svc, pln, cmp, tml };
+}
+function computeEstimate(svcVal, planVal, complexityVal, timelineVal) {
+  let price = 0;
+  if (svcVal === "web") { if (planVal === "rent") price = 500; if (planVal === "buy") price = 3000; }
+  else if (svcVal === "fix") price = 300;
+  else if (svcVal === "consult") price = 400;
+  else return 0;
+  if (complexityVal === "standard") price *= 1.5;
+  if (complexityVal === "advanced") price *= 3;
+  if (timelineVal === "urgent") price *= 1.5;
+  return Math.floor(price);
+}
+window.calculatePrice = function() {
+  const { svc, pln, cmp, tml } = resolvePriceInputs();
+  if (!svc) return 0;
+  const estimate = computeEstimate(svc.value, pln?.value, cmp?.value, tml?.value);
+  const legacyPrice = document.getElementById("price");
+  if (legacyPrice) legacyPrice.innerText = "Estimated Price: R" + estimate;
+  const leadPrice = document.getElementById("leadPrice");
+  const wrap = document.getElementById("leadPriceWrap");
+  if (leadPrice && wrap) {
+    const show = !!svc.value && estimate > 0;
+    wrap.hidden = !show;
+    if (show) leadPrice.innerText = "Estimated Price: R" + estimate;
+  }
+  const webOpts = document.getElementById("webOptions");
+  if (webOpts && document.getElementById("service")) {
+    webOpts.style.display = document.getElementById("service").value === "web" ? "block" : "none";
+  }
+  return estimate;
+};
+
+/* Backwards-compatible booking entry: delegates into unified lead flow. */
+window.submitBooking = async function() {
+  document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
+  if (typeof showNotification === "function") showNotification("success", "Use the unified form", "Tell us what you need below — estimates and bookings now use one form.");
+};
+
+/* ============================================================
+   LOAD BOOKINGS — Real-time Firestore listener (admin only)
+   ============================================================ */
+function loadBookings() {
+  const container = document.getElementById("bookingsContainer");
+
+  onSnapshot(collection(db, "bookings"), (snapshot) => {
+    container.innerHTML = "";
+
+    snapshot.forEach(docSnap => {
+      const data = docSnap.data();
+      const id = docSnap.id;
+      const cust = data.customer || {};
+      const enq = data.enquiry || {};
+      const book = data.booking || {};
+      const priceTxt = esc((data.pricing && data.pricing.estimateText) || data.price || "");
+      const title = esc(enq.subject || data.service || data.serviceType || "Lead");
+      const custName = esc(cust.fullName || "N/A");
+      const custEmail = cust.email ? " · " + esc(cust.email) : "";
+      const custPhone = cust.phone ? " · " + esc(cust.phone) : "";
+      const leadType = esc(data.leadType || "booking");
+      const svcName = esc(data.serviceType || data.service || "N/A");
+      const plan = esc(data.plan || "N/A");
+      const complexity = esc(data.complexity || "N/A");
+      const timeline = esc(data.timeline || enq.urgency || "N/A");
+      const bookDate = esc(book.preferredDate || "—");
+      const bookTime = esc(book.preferredTime || "");
+      const bookMethod = esc(book.serviceMethod || "");
+      const status = esc(data.status || "Pending");
+
+      container.innerHTML += `
+        <div class="booking-card">
+          <h3>${title}</h3>
+          <p>Customer: <strong>${custName}</strong>${custEmail}${custPhone}</p>
+          <p>Type: ${leadType}</p>
+          <p>Service: ${svcName}</p>
+          <p>Plan: ${plan}</p>
+          <p>Complexity: ${complexity}</p>
+          <p>Timeline: ${timeline}</p>
+          <p>Date: ${bookDate} ${bookTime} · ${bookMethod}</p>
+          <p>${priceTxt}</p>
+          <p>Status: <strong>${status}</strong></p>
+
+          <select class="status-select" onchange="updateStatus('${id}', this.value)">
+            <option value="">Change Status</option>
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+          </select>
+
+          <button class="delete-btn" onclick="deleteBooking('${id}')">Delete</button>
+        </div>
+      `;
+    });
+  });
+}
+
+/* ============================================================
+   UPDATE BOOKING STATUS
+   ============================================================ */
+window.updateStatus = async function(id, newStatus) {
+  if (!newStatus) return;
+
+  await updateDoc(doc(db, "bookings", id), {
+    status: newStatus
+  });
+}
+
+/* ============================================================
+   DELETE BOOKING
+   ============================================================ */
+window.deleteBooking = async function(id) {
+  if (confirm("Delete this booking permanently?")) {
+    await deleteDoc(doc(db, "bookings", id));
+  }
+}
+
+/* ============================================================
+   FORMSPREE CONTACT FORM — AJAX Submit + Toast Notifications
+   ============================================================ */
+const contactForm = document.getElementById('contactForm');
+const submitBtn = document.getElementById('contactSubmitBtn');
+
+if (contactForm) {
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const target = e.target;
+    if (target && target.id === 'leadForm') return;
+
+    // Disable button and show loading state
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="spinner"></span> Sending...';
+
+    const formData = new FormData(contactForm);
+
+    try {
+      const response = await fetch(contactForm.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        showNotification(
+          'success',
+          'Message Sent!',
+          'Thank you! Your message has been sent successfully. We\'ll get back to you as soon as possible.'
+        );
+        contactForm.reset();
+      } else {
+        const data = await response.json();
+        throw new Error(data?.error || 'Form submission failed');
+      }
+    } catch (err) {
+      showNotification(
+        'error',
+        'Submission Failed',
+        err.message || 'Something went wrong. Please try again or email us directly at hello@ktmtech.com.'
+      );
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = 'Send Message';
+    }
+  });
+}
+
+const LEAD_SERVICE_MAP = { "website-development": { legacy: "web" }, "website-redesign": { legacy: "web" }, "web-application": { legacy: "web" }, "repair": { legacy: "fix" }, "it-support": { legacy: "fix" }, "business-tech": { legacy: "consult" }, "quote": { legacy: "" }, "general": { legacy: "" }, "other": { legacy: "" } };
+let lastLeadAt = 0;
+function esc(s) { return String(s ?? "").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+function setErr(id, on) { const m = document.getElementById("err-" + id); const f = document.getElementById(id); if (m) m.classList.toggle("show", !!on); if (f) f.classList.toggle("invalid", !!on); }
+function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
+function validPhone(v) { const d = (v || "").replace(/\D/g, ""); return d.length >= 7 && d.length <= 15; }
+function syncLegacyFromLead() { const svc = document.getElementById("leadService")?.value || ""; const map = LEAD_SERVICE_MAP[svc]; const legacySvc = document.getElementById("legacyService"); if (!legacySvc || !map) return; legacySvc.value = map.legacy || ""; }
+
+/* ============================================================
+   TOAST PART2 — See UNIFIED LEAD HANDLER below
+   ============================================================ */
+function refreshLeadUI() {
+  const svc = document.getElementById("leadService")?.value || "";
+  const intent = document.querySelector('input[name="intent"]:checked')?.value || "enquiry";
+  document.getElementById("panelWeb").hidden = !(svc === "website-development" || svc === "website-redesign" || svc === "web-application" || svc === "quote");
+  document.getElementById("panelRepair").hidden = !(svc === "repair");
+  document.getElementById("panelSupport").hidden = !(svc === "it-support" || svc === "business-tech" || svc === "quote");
+  document.getElementById("panelBooking").hidden = false;
+  const wb = document.getElementById("wantBooking");
+  if (wb && intent === "booking" && !wb.checked) { wb.checked = true; }
+  const bf = document.getElementById("bookingFields"); if (bf && wb) bf.hidden = !wb.checked;
+  const hw = document.getElementById("hasWebsite")?.value;
+  const uw = document.getElementById("existingUrlWrap"); if (uw) uw.hidden = !(hw === "yes" || hw === "needs-redesign");
+  document.querySelectorAll(".intent-card").forEach(c => c.classList.toggle("selected", !!c.querySelector("input")?.checked));
+  const cp = document.getElementById("contactPreference")?.value || "whatsapp";
+  document.querySelectorAll(".quick-contact-row .quick-link").forEach(a => a.classList.toggle("selected", a.dataset.pref === cp));
+  const btn = document.getElementById("leadSubmitBtn");
+  if (btn) btn.textContent = intent === "booking" ? "Request Booking →" : intent === "quote" ? "Request a Quote →" : "Send My Enquiry →";
+  syncLegacyFromLead(); window.calculatePrice();
+}
+["leadService","hasWebsite"].forEach(id => { document.getElementById(id)?.addEventListener("change", refreshLeadUI); });
+["legacyService","legacyPlan","legacyComplexity","legacyTimeline"].forEach(id => { document.getElementById(id)?.addEventListener("change", () => window.calculatePrice()); });
+document.querySelectorAll('input[name="intent"]').forEach(r => r.addEventListener("change", refreshLeadUI));
+document.querySelectorAll(".quick-contact-row .quick-link").forEach(a => a.addEventListener("click", () => { const hid = document.getElementById("contactPreference"); if (hid) hid.value = a.dataset.pref || "whatsapp"; document.querySelectorAll(".quick-contact-row .quick-link").forEach(x => x.classList.toggle("selected", x === a)); }));
+document.getElementById("wantBooking")?.addEventListener("change", () => { document.getElementById("bookingFields").hidden = !document.getElementById("wantBooking").checked; });
+document.getElementById("prefDate")?.addEventListener("focus", () => { const pd = document.getElementById("prefDate"); if (pd && !pd.min) pd.min = new Date().toISOString().slice(0, 10); });
+document.getElementById("leadNewBtn")?.addEventListener("click", () => { document.getElementById("leadSuccess").hidden = true; const f = document.getElementById("leadForm"); f.hidden = false; f.reset(); refreshLeadUI(); });
+if (document.getElementById("leadForm")) refreshLeadUI();
+/* UNIFIED LEAD SUBMIT */
+const leadForm = document.getElementById("leadForm");
+if (leadForm) { leadForm.addEventListener("submit", async (e) => {
+  e.preventDefault(); e.stopPropagation();
+  if (Date.now() - lastLeadAt < 8000) { showNotification("error", "Slow down", "Wait a few seconds before sending again."); return; }
+  if (document.getElementById("leadHp")?.value) { showNotification("success", "Received", "Thank you."); return; }
+  const gv = (id) => document.getElementById(id)?.value.trim() || "";
+  const svc = gv("leadService"), name = gv("leadName"), email = gv("leadEmail"), phone = gv("leadPhone"), subject = gv("leadSubject"), message = gv("leadMessage");
+  const intent = document.querySelector('input[name="intent"]:checked')?.value || "enquiry";
+  const contactPref = document.getElementById("contactPreference")?.value || "whatsapp";
+  let ok = true; const ck = (id, v) => { setErr(id, !v); if (!v) ok = false; };
+  ck("leadService", !!svc); ck("leadName", name.length >= 2); ck("leadEmail", validEmail(email)); ck("leadPhone", validPhone(phone)); ck("leadSubject", subject.length >= 4); ck("leadMessage", message.length >= 10);
+  if (!ok) { showNotification("error", "Check the form", "Fix highlighted fields and try again."); return; }
+  const wantBooking = intent === "booking" || document.getElementById("wantBooking")?.checked;
+  const estimate = window.calculatePrice();
+  const btn = document.getElementById("leadSubmitBtn");
+  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Sending...';
+  const g = (id) => document.getElementById(id)?.value.trim() || "";
+  const leadDoc = { leadType: intent, serviceType: svc, customer: { fullName: name, email, phone, businessName: g("leadBusiness") }, enquiry: { subject, description: message, urgency: g("leadUrgency") || "not-urgent" }, serviceDetails: { webKind: g("webKind"), hasWebsite: document.getElementById("hasWebsite")?.value || "", existingUrl: g("existingUrl"), webPurpose: g("webPurpose"), deadline: document.getElementById("webDeadline")?.value || "", budget: document.getElementById("webBudget")?.value || "", deviceType: document.getElementById("deviceType")?.value || "", deviceBrand: g("deviceBrand"), deviceModel: g("deviceModel"), problemStart: document.getElementById("problemStart")?.value || "", deviceUsable: document.getElementById("deviceUsable")?.value || "", repairMethod: document.getElementById("repairMethod")?.value || "", issueType: document.getElementById("issueType")?.value || "", systemAffected: g("systemAffected") }, booking: { requested: !!wantBooking, preferredDate: document.getElementById("prefDate")?.value || "", preferredTime: document.getElementById("prefTime")?.value || "", serviceMethod: document.getElementById("serviceMethod")?.value || "" }, pricing: { estimate: estimate || 0, estimateText: estimate ? "Estimated Price: R" + estimate : "", currency: "ZAR" }, service: svc, plan: document.getElementById("legacyPlan")?.value || "", complexity: document.getElementById("legacyComplexity")?.value || "", timeline: document.getElementById("legacyTimeline")?.value || "normal", price: estimate ? "Estimated Price: R" + estimate : "", contactPreference: contactPref, status: "Pending", source: "unified lead form", createdAt: serverTimestamp() };
+  let fsOk = false, fsId = "", fsErr = "";
+  try { const ref = await addDoc(collection(db, "bookings"), leadDoc); fsOk = true; fsId = ref.id; } catch (err) { fsErr = err?.message || "firestore failed"; console.error(err); }
+  let emOk = false, emErr = "";
+  try { const fd = new FormData(leadForm); fd.set("leadType", intent); fd.set("estimate", leadDoc.pricing.estimateText); const resp = await fetch(leadForm.action, { method: "POST", body: fd, headers: { Accept: "application/json" } }); emOk = resp.ok; if (!resp.ok) emErr = "email failed"; } catch (err) { emErr = err?.message || "email failed"; }
+  lastLeadAt = Date.now(); btn.disabled = false; refreshLeadUI();
+  if (fsOk || emOk) { leadForm.hidden = true; const s = document.getElementById("leadSuccess"); s.hidden = false; document.getElementById("leadBookingNote").hidden = !wantBooking; document.getElementById("leadRef").textContent = fsId ? "Reference: " + fsId.slice(0, 8).toUpperCase() : "Received."; s.scrollIntoView({ behavior: "smooth", block: "center" }); showNotification("success", "Enquiry received", wantBooking ? "Booking request received — confirmed after review." : "Thank you! We will respond shortly."); leadForm.reset(); refreshLeadUI(); if (!fsOk) console.warn(emErr); if (!emOk) console.warn(fsErr); }
+  else { console.error({ fsErr, emErr }); showNotification("error", "Submission failed", "Try again or WhatsApp 067 864 1328."); }
+}); }
+function showNotification(type, title, message) {
+  // Remove any existing notification
+  const existing = document.querySelector('.notification');
+  if (existing) existing.remove();
+
+  const notif = document.createElement('div');
+  notif.className = `notification ${type}`;
+  notif.setAttribute('role', 'alert');
+  notif.innerHTML = `
+    <span class="notif-icon">${type === 'success' ? '✓' : '✕'}</span>
+    <div class="notif-content">
+      <div class="notif-title">${title}</div>
+      <div class="notif-message">${message}</div>
+    </div>
+    <button class="notif-close" onclick="this.parentElement.remove()" aria-label="Close notification">&times;</button>
+  `;
+
+  document.body.appendChild(notif);
+
+  // Trigger animation
+  requestAnimationFrame(() => {
+    notif.classList.add('show');
+  });
+
+  // Auto-dismiss after 6 seconds
+  setTimeout(() => {
+    notif.classList.remove('show');
+    setTimeout(() => notif.remove(), 400);
+  }, 6000);
+}
+</script>
+
+</body>
+</html>

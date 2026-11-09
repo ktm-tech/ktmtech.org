@@ -1,0 +1,1919 @@
+/* ============================================================
+   CSS VARIABLES — KTM Tech Official Brand
+   ============================================================ */
+
+   :root {
+  --primary-blue: #209AF4;
+  --secondary-blue: #1CBFF3;
+  --accent-blue: #26C4E7;
+  --bg: #020221;
+  --card-bg: #0A1230;
+  --text-primary: #FFFFFF;
+  --text-secondary: #C8D2E6;
+  --border: #2A3F63;
+  --blue-gradient: linear-gradient(135deg, #26C4E7 0%, #209AF4 50%, #1B7DF0 100%);
+  --glow-blue: rgba(32, 154, 244, 0.25);
+  --glow-blue-soft: rgba(32, 154, 244, 0.12);
+  /* Electric current language — shared by hero mark, circuits, cards */
+  --charge: #EAF9FF;
+  --charge-cyan: #9FE8FF;
+  --pulse: 2.6s;
+  --radius: 14px;
+  --radius-sm: 10px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Background blueprint grid pattern — 5% opacity */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(rgba(32, 154, 244, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(32, 154, 244, 0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Subtle radial glow on body */
+body::after {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 50% 50%, rgba(32, 154, 244, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================================================
+   CIRCUIT DESIGN LANGUAGE — SVG Components
+   ============================================================ */
+
+/* Hero circuit background — 8% opacity, PCB-inspired traces */
+.circuit-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.08;
+}
+
+.circuit-bg svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Section dividers made from PCB traces */
+.circuit-divider {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  overflow: hidden;
+  opacity: 0.12;
+}
+
+.circuit-divider svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Circuit corner accents for cards — 45° & 90° angles, rounded terminals */
+.circuit-corner {
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  opacity: 0.15;
+  transition: var(--transition);
+}
+
+.card:hover .circuit-corner,
+.feature-card:hover .circuit-corner {
+  opacity: 0.45;
+}
+
+.circuit-corner-tl { top: 0; left: 0; }
+.circuit-corner-tr { top: 0; right: 0; transform: scaleX(-1); }
+.circuit-corner-bl { bottom: 0; left: 0; transform: scaleY(-1); }
+.circuit-corner-br { bottom: 0; right: 0; transform: scale(-1, -1); }
+
+/* Circuit node decoration for headings — circular nodes with blue glow */
+.circuit-node {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary-blue);
+  box-shadow: 0 0 10px var(--glow-blue);
+  margin: 0 14px;
+  vertical-align: middle;
+  position: relative;
+  animation: pulseNode 3s ease-in-out infinite;
+}
+
+@keyframes pulseNode {
+  0%, 100% { box-shadow: 0 0 6px var(--glow-blue); }
+  50% { box-shadow: 0 0 16px var(--glow-blue); }
+}
+
+.circuit-node::before,
+.circuit-node::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 24px;
+  height: 1.5px;
+  background: var(--primary-blue);
+  opacity: 0.3;
+}
+
+.circuit-node::before { right: 100%; transform: translateY(-50%); }
+.circuit-node::after { left: 100%; transform: translateY(-50%); }
+
+/* ============================================================
+   NAVIGATION — Glassmorphism + animated circuit underline
+   ============================================================ */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 40px;
+  background: rgba(2, 2, 33, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(42, 63, 99, 0.35);
+  transition: var(--transition);
+}
+
+/* Animated circuit trace under nav — draws itself continuously */
+.nav-circuit-line {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  overflow: hidden;
+}
+
+.nav-circuit-line .circuit-path {
+  stroke: url(#navGrad);
+  stroke-width: 1.5;
+  fill: none;
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  animation: drawCircuit 6s ease-in-out infinite;
+}
+
+@keyframes drawCircuit {
+  0% { stroke-dashoffset: 2000; }
+  50% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -2000; }
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Official PNG cropped to its artwork box (measured bbox x48–1180, y264–1032
+   of the 1254² canvas) so the square padding never inflates the nav bar.
+   The mark's own bloom reads as a soft glow against the glass nav. */
+.logo-container .nav-logo {
+  height: 44px;
+  width: auto;
+  aspect-ratio: 1132 / 768;
+  object-fit: cover;
+  object-position: center 51.7%;
+}
+
+.logo-container .brand-lockup,
+.logo-container img {
+  height: 42px;
+  width: auto;
+  transition: var(--transition);
+}
+
+.logo-container:hover .brand-lockup,
+.logo-container:hover img,
+.logo-container:focus-visible .brand-lockup,
+.logo-container:focus-visible img {
+  filter: brightness(1.15) drop-shadow(0 0 10px rgba(32, 154, 244, 0.55));
+  transform: scale(1.03);
+}
+
+.logo-container:focus-visible {
+  outline: 2px solid var(--primary-blue);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+/* Offset anchored sections so fixed nav never covers section tops */
+section[id] {
+  scroll-margin-top: 70px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  transition: var(--transition);
+  position: relative;
+  padding: 4px 0;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--blue-gradient);
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+.nav-links a:hover {
+  color: var(--text-primary);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-cta {
+  padding: 10px 24px;
+  background: var(--blue-gradient);
+  color: var(--text-primary);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-cta:hover {
+  box-shadow: 0 0 28px var(--glow-blue);
+  transform: translateY(-1px);
+}
+
+/* Hamburger menu for mobile */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+}
+
+.hamburger span {
+  width: 24px;
+  height: 2px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+/* ============================================================
+   HERO SECTION — Circuit blueprint background, gradient text
+   ============================================================ */
+.hero {
+  position: relative;
+  /* Scopes the hero-logo-bg screen blend to this section's own layers */
+  isolation: isolate;
+  /* Fill the browser viewport exactly on laptop — svh keeps it true under
+     mobile browser chrome, vh is the fallback for older engines */
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  /* Top padding clears the fixed nav (≈72px) with breathing room */
+  padding: 104px 24px 96px;
+  overflow: hidden;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+}
+
+/* Staggered entrance — badge → headline → copy → actions */
+@keyframes heroRise {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-badge,
+.hero h1,
+.hero p,
+.hero-actions {
+  animation: heroRise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero h1 { animation-delay: 0.12s; }
+.hero p  { animation-delay: 0.22s; }
+.hero-actions { animation-delay: 0.32s; }
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border: 1px solid rgba(32, 154, 244, 0.2);
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--secondary-blue);
+  background: rgba(32, 154, 244, 0.06);
+  margin-bottom: 32px;
+  letter-spacing: 0.5px;
+}
+
+.hero-badge .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary-blue);
+  box-shadow: 0 0 8px var(--glow-blue);
+  animation: pulseDot 2s ease-in-out infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.hero h1 {
+  /* Headline leads the hero now that the brand mark image is gone */
+  font-size: clamp(2.4rem, 5.4vw, 4.2rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -1px;
+  margin-bottom: 22px;
+  text-transform: uppercase;
+}
+
+.hero h1 .gradient-text {
+  background: var(--blue-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero p {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  padding: 14px 36px;
+  background: var(--blue-gradient);
+  color: var(--text-primary);
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--font);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 50%);
+  transition: var(--transition);
+}
+
+.btn-primary:hover {
+  /* clip-path clips box-shadow — glow via drop-shadow so it follows the notched shape */
+  box-shadow: none;
+  filter: drop-shadow(0 0 18px rgba(32, 154, 244, 0.5)) drop-shadow(0 8px 24px rgba(0, 0, 0, 0.4));
+  transform: translateY(-2px);
+}
+
+.btn-primary:hover::before {
+  opacity: 0;
+}
+
+.btn-secondary {
+  padding: 14px 36px;
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-family: var(--font);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-secondary:hover {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 20px var(--glow-blue-soft);
+  transform: translateY(-2px);
+}
+
+/* Circuit-inspired button border — draws on hover */
+.btn-circuit {
+  position: relative;
+}
+
+.btn-circuit svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.btn-circuit:hover svg {
+  opacity: 1;
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  /* Above the .hero-logo-bg watermark so the white mark band never washes it out */
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  opacity: 0.35;
+  transition: var(--transition);
+}
+
+.scroll-indicator:hover {
+  opacity: 0.65;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 28px;
+  background: linear-gradient(to bottom, var(--primary-blue), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* ============================================================
+   SECTION STYLES
+   ============================================================ */
+.section {
+  position: relative;
+  padding: 100px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-header h2 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 16px;
+}
+
+.section-header p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  max-width: 540px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ============================================================
+   SERVICES / FEATURE CARDS — Glassmorphism + circuit corners
+   ============================================================ */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.feature-card {
+  position: relative;
+  background: rgba(10, 18, 48, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(42, 63, 99, 0.25);
+  border-radius: var(--radius);
+  padding: 36px 28px 32px;
+  transition: var(--transition);
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--blue-gradient);
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(32, 154, 244, 0.2);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35), 0 0 28px var(--glow-blue-soft);
+}
+
+.feature-card:hover::before {
+  opacity: 1;
+}
+
+.feature-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  background: rgba(32, 154, 244, 0.08);
+  border: 1px solid rgba(32, 154, 244, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+  transition: var(--transition);
+}
+
+.feature-card:hover .feature-icon {
+  background: rgba(32, 154, 244, 0.15);
+  border-color: rgba(32, 154, 244, 0.25);
+  box-shadow: 0 0 16px var(--glow-blue-soft);
+}
+
+.feature-icon svg {
+  width: 22px;
+  height: 22px;
+  color: var(--primary-blue);
+}
+
+.feature-card h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  letter-spacing: -0.2px;
+}
+
+.feature-card p {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+/* Animated circuit path in card hover — bottom-right trace */
+.feature-card .card-circuit-hover {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 80px;
+  height: 80px;
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.feature-card:hover .card-circuit-hover {
+  opacity: 0.15;
+}
+
+/* ============================================================
+   LOGIN / REGISTER — Glassmorphism card
+   ============================================================ */
+.auth-section {
+  position: relative;
+  padding: 100px 24px;
+}
+
+.auth-container {
+  max-width: 420px;
+  margin: 0 auto;
+  background: rgba(10, 18, 48, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(42, 63, 99, 0.25);
+  border-radius: var(--radius);
+  padding: 40px 36px;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--blue-gradient);
+}
+
+.auth-container h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.auth-container p {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(2, 2, 33, 0.5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font);
+  font-size: 0.95rem;
+  transition: var(--transition);
+  margin-bottom: 14px;
+  outline: none;
+}
+
+.auth-input:focus {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(32, 154, 244, 0.1);
+}
+
+.auth-input::placeholder {
+  color: rgba(200, 210, 230, 0.35);
+}
+
+.auth-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.auth-actions .btn-primary {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 0.88rem;
+}
+
+.auth-actions .btn-secondary {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 0.88rem;
+}
+
+/* ============================================================
+   BOOKING SECTION — Glassmorphism container
+   ============================================================ */
+.booking-section {
+  position: relative;
+  padding: 100px 24px;
+}
+
+.booking-container {
+  max-width: 640px;
+  margin: 0 auto;
+  background: rgba(10, 18, 48, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(42, 63, 99, 0.25);
+  border-radius: var(--radius);
+  padding: 40px 36px;
+  position: relative;
+  overflow: hidden;
+}
+
+.booking-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--blue-gradient);
+}
+
+.booking-container h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.booking-select {
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(2, 2, 33, 0.5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font);
+  font-size: 0.92rem;
+  transition: var(--transition);
+  margin-bottom: 14px;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23209AF4' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+}
+
+.booking-select:focus {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(32, 154, 244, 0.1);
+}
+
+.booking-select option {
+  background: #020221;
+  color: var(--text-primary);
+}
+
+.price-display {
+  text-align: center;
+  margin: 20px 0;
+  padding: 20px;
+  background: rgba(32, 154, 244, 0.04);
+  border: 1px solid rgba(32, 154, 244, 0.12);
+  border-radius: var(--radius-sm);
+}
+
+.price-display h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  background: var(--blue-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.price-display p {
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  margin-top: 4px;
+}
+
+/* ============================================================
+   ADMIN DASHBOARD
+   ============================================================ */
+.admin-section {
+  position: relative;
+  padding: 100px 24px;
+}
+
+.admin-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.admin-container h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.bookings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.booking-card {
+  background: rgba(10, 18, 48, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(42, 63, 99, 0.25);
+  border-radius: var(--radius);
+  padding: 24px;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.booking-card:hover {
+  border-color: rgba(32, 154, 244, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.booking-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.booking-card p {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  margin-bottom: 6px;
+}
+
+.booking-card p strong {
+  color: var(--text-primary);
+}
+
+.status-select {
+  width: 100%;
+  padding: 10px 12px;
+  background: rgba(2, 2, 33, 0.5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font);
+  font-size: 0.85rem;
+  margin-top: 12px;
+  outline: none;
+  cursor: pointer;
+}
+
+.status-select:focus {
+  border-color: var(--primary-blue);
+}
+
+.delete-btn {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background: rgba(255, 59, 48, 0.08);
+  border: 1px solid rgba(255, 59, 48, 0.2);
+  border-radius: var(--radius-sm);
+  color: #FF3B30;
+  font-family: var(--font);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.delete-btn:hover {
+  background: rgba(255, 59, 48, 0.16);
+  border-color: rgba(255, 59, 48, 0.35);
+}
+
+/* ============================================================
+   FOOTER — Circuit traces flowing into bottom
+   ============================================================ */
+footer {
+  position: relative;
+  background: rgba(2, 2, 33, 0.9);
+  border-top: 1px solid rgba(42, 63, 99, 0.25);
+  padding: 80px 24px 32px;
+  overflow: hidden;
+}
+
+/* Circuit traces flowing into footer */
+.footer-circuit {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.footer-circuit svg {
+  width: 100%;
+  height: 100%;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-brand .brand-lockup,
+.footer-brand img {
+  height: 44px;
+  width: auto;
+  margin-bottom: 16px;
+  display: block;
+}
+
+/* Official PNG in the footer — cropped to its artwork box so only the KTM
+   mark reads at brand scale */
+.footer-brand .footer-logo {
+  height: auto;
+  width: min(220px, 100%);
+  aspect-ratio: 1132 / 768;
+  object-fit: cover;
+  object-position: center 51.7%;
+}
+
+.footer-brand p {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  max-width: 300px;
+  opacity: 0.7;
+}
+
+.footer-col h4 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+  margin-bottom: 18px;
+  opacity: 0.6;
+}
+
+.footer-col a {
+  display: block;
+  color: rgba(200, 210, 230, 0.5);
+  text-decoration: none;
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+  transition: var(--transition);
+}
+
+.footer-col a:hover {
+  color: var(--primary-blue);
+}
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 48px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid rgba(42, 63, 99, 0.15);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-bottom p {
+  color: rgba(200, 210, 230, 0.35);
+  font-size: 0.8rem;
+}
+
+.footer-social {
+  display: flex;
+  gap: 12px;
+}
+
+.footer-social a {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(42, 63, 99, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.footer-social a:hover {
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+  box-shadow: 0 0 16px var(--glow-blue-soft);
+}
+
+/* ============================================================
+   RESPONSIVE BREAKPOINTS
+   ============================================================ */
+@media (max-width: 1024px) {
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  nav {
+    padding: 12px 20px;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: rgba(2, 2, 33, 0.95);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(42, 63, 99, 0.3);
+    padding: 20px;
+    gap: 16px;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-cta {
+    display: none;
+  }
+
+  .hero {
+    min-height: 80vh;
+    padding: 100px 20px 60px;
+  }
+
+  .section {
+    padding: 60px 20px;
+  }
+
+  .auth-section,
+  .booking-section,
+  .admin-section {
+    padding: 60px 20px;
+  }
+
+  .booking-container,
+  .auth-container {
+    padding: 28px 20px;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .auth-actions {
+    flex-direction: column;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .hero-actions .btn-primary,
+  .hero-actions .btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .booking-container,
+  .auth-container {
+    padding: 24px 16px;
+  }
+
+  .feature-card {
+    padding: 24px 20px;
+  }
+}
+
+/* ============================================================
+   UTILITY CLASSES
+   ============================================================ */
+.text-gradient {
+  background: var(--blue-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glass {
+  background: rgba(10, 18, 48, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(42, 63, 99, 0.25);
+}
+
+.glow-blue {
+  box-shadow: 0 0 28px var(--glow-blue);
+}
+
+/* Fade-in scroll animation */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-blue);
+}
+
+/* ============================================================
+   SELECTION
+   ============================================================ */
+::selection {
+  background: rgba(32, 154, 244, 0.3);
+  color: var(--text-primary);
+}
+
+/* ============================================================
+   CONTACT SECTION — Formspree Integration
+   ============================================================ */
+.contact-section {
+  position: relative;
+  padding: 100px 24px;
+}
+
+.contact-container {
+  max-width: 680px;
+  margin: 0 auto;
+  background: rgba(10, 18, 48, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(42, 63, 99, 0.25);
+  border-radius: var(--radius);
+  padding: 40px 36px;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--blue-gradient);
+}
+
+.contact-container h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.form-group label .required {
+  color: #FF3B30;
+  margin-left: 2px;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(2, 2, 33, 0.5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font);
+  font-size: 0.92rem;
+  transition: var(--transition);
+  outline: none;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(32, 154, 244, 0.1);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: rgba(200, 210, 230, 0.35);
+}
+
+.form-select {
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23209AF4' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+}
+
+.form-select option {
+  background: #020221;
+  color: var(--text-primary);
+}
+
+.form-textarea {
+  min-height: 130px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.form-submit-wrap {
+  position: relative;
+  margin-top: 8px;
+}
+
+.form-submit-btn {
+  width: 100%;
+  padding: 16px 36px;
+  background: var(--blue-gradient);
+  color: var(--text-primary);
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--font);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.form-submit-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 50%);
+  transition: var(--transition);
+}
+
+.form-submit-btn:hover:not(:disabled) {
+  box-shadow: 0 0 36px var(--glow-blue), 0 8px 32px rgba(32, 154, 244, 0.15);
+  transform: translateY(-2px);
+}
+
+.form-submit-btn:hover:not(:disabled)::before {
+  opacity: 0;
+}
+
+.form-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Loading spinner */
+.spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Notification Toast */
+.notification {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 9999;
+  max-width: 400px;
+  padding: 18px 22px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 12px 48px rgba(0,0,0,0.4);
+  transform: translateX(120%);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+  opacity: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.notification.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.notification.success {
+  background: rgba(6, 78, 59, 0.95);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #D1FAE5;
+}
+
+.notification.success .notif-icon {
+  color: #34D399;
+  font-size: 1.2rem;
+}
+
+.notification.error {
+  background: rgba(127, 29, 29, 0.95);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #FEE2E2;
+}
+
+.notification.error .notif-icon {
+  color: #F87171;
+  font-size: 1.2rem;
+}
+
+.notif-content {
+  flex: 1;
+}
+
+.notif-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+
+.notif-message {
+  opacity: 0.9;
+  font-size: 0.85rem;
+}
+
+.notif-close {
+  background: none;
+  border: none;
+  color: inherit;
+  opacity: 0.5;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 2px;
+  transition: var(--transition);
+  line-height: 1;
+}
+
+.notif-close:hover {
+  opacity: 1;
+}
+
+/* ============================================================
+   UNIFIED LEAD FORM — extends booking/contact design system
+   ============================================================ */
+.lead-container {
+  max-width: 760px;
+  margin: 0 auto;
+  background: rgba(10, 18, 48, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(42, 63, 99, 0.25);
+  border-radius: var(--radius);
+  padding: 40px 36px;
+  position: relative;
+  overflow: hidden;
+}
+.lead-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--blue-gradient);
+}
+.lead-container h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 6px; text-align: center; }
+.lead-subtitle { text-align: center; color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 24px; }
+.lead-step { border: 1px solid rgba(42,63,99,0.25); border-radius: var(--radius-sm); padding: 20px 18px; margin-bottom: 18px; background: rgba(2,2,33,0.35); }
+.lead-step-legend { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: var(--text-primary); margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+.lead-step-legend .step-num { width: 24px; height: 24px; border-radius: 50%; background: var(--blue-gradient); display: inline-flex; align-items: center; justify-content: center; font-size: 0.75rem; }
+.lead-hint { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 12px; }
+.lead-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 10px; margin-top: 10px; }
+.lead-option { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 10px; text-align: center; cursor: pointer; transition: var(--transition); background: rgba(2,2,33,0.5); font-size: 0.85rem; }
+.lead-option:hover { border-color: var(--primary-blue); }
+.lead-option.selected { border-color: var(--primary-blue); background: rgba(32,154,244,0.12); box-shadow: 0 0 0 3px rgba(32,154,244,0.1); }
+.lead-option .opt-icon { font-size: 1.3rem; display: block; margin-bottom: 6px; }
+.lead-option input { position: absolute; opacity: 0; pointer-events: none; }
+.intent-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 10px; }
+.intent-card { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 10px; text-align: center; cursor: pointer; background: rgba(2,2,33,0.5); transition: var(--transition); font-size: 0.85rem; }
+.intent-card.selected { border-color: var(--primary-blue); background: rgba(32,154,244,0.12); box-shadow: 0 0 0 3px rgba(32,154,244,0.1); }
+.intent-card strong { display: block; margin-bottom: 4px; }
+.intent-card span { color: var(--text-secondary); font-size: 0.76rem; }
+.field-error { color: #FF9D9D; font-size: 0.78rem; margin-top: 5px; display: none; }
+.field-error.show { display: block; }
+.form-input.invalid, .form-select.invalid, .form-textarea.invalid { border-color: #FF3B30 !important; box-shadow: 0 0 0 3px rgba(255,59,48,0.12) !important; }
+.hp-field { position: absolute !important; left: -9999px !important; opacity: 0 !important; height: 0 !important; width: 0 !important; }
+.lead-success { text-align: center; padding: 32px 16px; }
+.lead-success .success-icon { width: 64px; height: 64px; border-radius: 50%; background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.4); display: inline-flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 16px; }
+.lead-success h3 { margin-bottom: 10px; }
+.lead-success p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 8px; }
+.lead-ref { display: inline-block; margin-top: 10px; padding: 8px 14px; border: 1px dashed rgba(32,154,244,0.4); border-radius: 8px; font-size: 0.8rem; color: var(--text-secondary); }
+.radio-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+.radio-pill { border: 1px solid var(--border); border-radius: 999px; padding: 9px 16px; font-size: 0.84rem; cursor: pointer; transition: var(--transition); background: rgba(2,2,33,0.5); }
+.radio-pill.selected { border-color: var(--primary-blue); background: rgba(32,154,244,0.14); }
+.radio-pill input { position: absolute; opacity: 0; pointer-events: none; }
+.quick-hint { font-size: 0.76rem; color: var(--text-secondary); font-weight: 400; text-transform: none; letter-spacing: 0; margin-left: 6px; }
+.quick-contact-row a.radio-pill.quick-link { text-decoration: none; color: var(--text-primary); display: inline-flex; align-items: center; gap: 7px; }
+.quick-contact-row a.radio-pill.quick-link:hover { border-color: var(--primary-blue); background: rgba(32,154,244,0.18); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(32,154,244,0.25); }
+.quick-contact-row a.radio-pill.quick-link.selected { border-color: var(--primary-blue); background: rgba(32,154,244,0.14); box-shadow: 0 0 0 3px rgba(32,154,244,0.12); }
+.quick-contact-row .ql-icon { font-size: 0.9rem; line-height: 1; display: inline-flex; align-items: center; }
+.quick-contact-row .ql-icon svg { width: 14px; height: 14px; }
+.quick-contact-row .ql-arrow { font-size: 0.7rem; opacity: 0.6; }
+.quick-note { font-size: 0.78rem; color: var(--text-secondary); margin-top: 8px; }
+@media (max-width: 600px) {
+  .lead-container { padding: 28px 20px; }
+  .intent-row { grid-template-columns: 1fr; }
+  .lead-step { padding: 16px 14px; }
+}
+
+/* ============================================================
+   CONTACT RESPONSIVE
+   ============================================================ */
+@media (max-width: 600px) {
+  .contact-container {
+    padding: 28px 20px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .notification {
+    top: 16px;
+    right: 16px;
+    left: 16px;
+    max-width: none;
+  }
+}
+
+/* ============================================================
+   FUTURISTIC RESTYLE — 1) HERO FIELD + KTM CURRENT
+   ============================================================ */
+
+/* Deep energy backdrop behind the hero */
+.hero {
+  background:
+    radial-gradient(120% 90% at 50% -10%, rgba(32, 154, 244, 0.16), transparent 60%),
+    radial-gradient(90% 60% at 50% 110%, rgba(28, 191, 243, 0.10), transparent 70%),
+    linear-gradient(180deg, #01011a 0%, #03031f 55%, var(--bg) 100%);
+}
+
+/* Brand watermark — KTM_TECH_LOGO_2.png sitting ON TOP of every background
+   layer above. `screen` drops the PNG's black canvas to nothing, so the
+   gradient, floor grid, circuits and glow below stay exactly as they are;
+   0.55 keeps the mark present without letting it compete with the headline.
+   z-index ties .hero-content (later in the DOM) so the copy always wins. */
+.hero-logo-bg {
+  position: absolute;
+  inset: 0;
+  background: url("images/KTM_TECH_LOGO_2.png") center center / contain no-repeat;
+  opacity: 0.55;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Perspective circuit floor — receding grid at the horizon */
+.hero::before {
+  content: '';
+  position: absolute;
+  left: -20%;
+  right: -20%;
+  bottom: -6%;
+  height: 56%;
+  background-image:
+    repeating-linear-gradient(90deg, rgba(32, 154, 244, 0.30) 0 1px, transparent 1px 74px),
+    repeating-linear-gradient(0deg, rgba(32, 154, 244, 0.22) 0 1px, transparent 1px 74px);
+  background-position: 0 0, 0 0;
+  transform: perspective(520px) rotateX(66deg);
+  transform-origin: 50% 0%;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 22%, #000 58%, transparent 94%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 22%, #000 58%, transparent 94%);
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 0;
+  animation: floorScroll 7s linear infinite;
+}
+
+@keyframes floorScroll {
+  from { background-position: 0 0, 0 0; }
+  to   { background-position: 0 0, 0 74px; }
+}
+
+/* Drifting energy field + vignette so copy stays legible */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(38% 46% at 18% 32%, rgba(32, 154, 244, 0.16), transparent 65%),
+    radial-gradient(42% 50% at 82% 64%, rgba(38, 196, 231, 0.13), transparent 65%),
+    radial-gradient(ellipse at 50% 50%, transparent 38%, rgba(1, 1, 20, 0.72) 100%);
+  pointer-events: none;
+  z-index: 1;
+  animation: energyDrift 18s ease-in-out infinite alternate;
+}
+
+@keyframes energyDrift {
+  from { transform: scale(1) translate3d(0, 0, 0); }
+  to   { transform: scale(1.06) translate3d(-1.5%, 1%, 0); }
+}
+
+/* Slow light sweep */
+.hero-scan {
+  position: absolute;
+  top: -40%;
+  left: -25%;
+  width: 150%;
+  height: 180%;
+  background: linear-gradient(180deg, transparent 46%, rgba(159, 232, 255, 0.10) 50%, transparent 54%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 1;
+  animation: scanSweep 9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes scanSweep {
+  0%        { transform: translateY(-45%); }
+  55%, 100% { transform: translateY(90%); }
+}
+
+/* ============================================================
+   FUTURISTIC RESTYLE — 2) CIRCUIT UPGRADES (kept, not deleted)
+   ============================================================ */
+
+/* Hero PCB traces: brighter, with charge pulses travelling the lines */
+.circuit-bg {
+  opacity: 0.15;
+}
+
+.circuit-bg path {
+  stroke-dasharray: 130 4300;
+  animation: traceFlow 8s linear infinite;
+}
+
+@keyframes traceFlow {
+  to { stroke-dashoffset: -4430; }
+}
+
+.circuit-bg circle {
+  animation: nodeBreath 3.4s ease-in-out infinite;
+}
+
+.circuit-bg circle:nth-child(odd)  { animation-delay: 1.1s; }
+.circuit-bg circle:nth-child(3n)   { animation-delay: 2.2s; }
+
+/* Shared node pulse used across nav, dividers and footer */
+@keyframes nodeBreath {
+  0%, 100% { opacity: 0.3; }
+  50%      { opacity: 0.95; }
+}
+
+/* Section dividers: visible PCB trace with a travelling pulse */
+.circuit-divider {
+  opacity: 0.3;
+}
+
+.circuit-divider path {
+  stroke-dasharray: 90 1560;
+  animation: dividerFlow 5.5s linear infinite;
+}
+
+@keyframes dividerFlow {
+  to { stroke-dashoffset: -1650; }
+}
+
+.circuit-divider circle {
+  animation: nodeBreath 3.4s ease-in-out infinite;
+}
+
+.circuit-divider circle:nth-child(even) { animation-delay: 1.4s; }
+
+/* Nav underline: keep the draw-on, add pulsing nodes */
+.nav-circuit-line circle {
+  animation: nodeBreath 3s ease-in-out infinite;
+}
+
+.nav-circuit-line circle:nth-child(odd) { animation-delay: 0.8s; }
+
+/* Footer traces slightly more present, nodes breathing */
+.footer-circuit {
+  opacity: 0.22;
+}
+
+.footer-circuit circle {
+  animation: nodeBreath 3.6s ease-in-out infinite;
+}
+
+.footer-circuit circle:nth-child(even) { animation-delay: 1.7s; }
+
+/* Card corner traces: bolder at rest, lit on hover */
+.circuit-corner {
+  opacity: 0.3;
+}
+
+.feature-card:hover .circuit-corner {
+  opacity: 0.7;
+}
+
+/* ============================================================
+   FUTURISTIC RESTYLE — 3) CONTROLS, CARDS, NAV
+   ============================================================ */
+
+/* Primary CTA: notched, angular silhouette */
+.btn-primary {
+  border-radius: 0;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  font-size: 0.9rem;
+  clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px);
+}
+
+.btn-primary::before {
+  background: linear-gradient(115deg, rgba(255, 255, 255, 0.18) 0%, transparent 45%, transparent 55%, rgba(255, 255, 255, 0.10) 100%);
+}
+
+/* Secondary CTA: sharp technical outline */
+.btn-secondary {
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  font-size: 0.9rem;
+  border-color: rgba(32, 154, 244, 0.35);
+}
+
+.btn-secondary:hover {
+  border-color: var(--charge-cyan);
+  box-shadow: 0 0 22px rgba(32, 154, 244, 0.35);
+  transform: translateY(-2px);
+}
+
+/* Nav CTA chip */
+.nav-cta {
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  font-size: 0.78rem;
+}
+
+/* Hero badge: technical label */
+.hero-badge {
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.72rem;
+  border-color: rgba(32, 154, 244, 0.35);
+}
+
+/* Nav links: technical caps */
+.nav-links a {
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  font-size: 0.78rem;
+}
+
+/* Card top edge: charge sweeps across on hover */
+.feature-card::before {
+  background: linear-gradient(90deg, transparent 0%, #26C4E7 25%, #209AF4 50%, transparent 100%);
+  background-size: 250% 100%;
+  background-position: 160% 0;
+}
+
+.feature-card:hover::before {
+  animation: edgeCharge 1.8s linear infinite;
+}
+
+@keyframes edgeCharge {
+  from { background-position: 160% 0; }
+  to   { background-position: -60% 0; }
+}
+
+/* Brand lockup flicker on nav hover */
+.logo-container:hover .brand-lockup,
+.logo-container:hover .nav-logo {
+  animation: logoFlicker 0.7s ease-out;
+}
+
+@keyframes logoFlicker {
+  0%  { opacity: 0.4; }
+  22% { opacity: 1; }
+  38% { opacity: 0.6; }
+  56% { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+/* ============================================================
+   FUTURISTIC RESTYLE — 4) RESPONSIVE + REDUCED MOTION
+   ============================================================ */
+@media (max-width: 768px) {
+  .hero {
+    padding-top: 110px;
+  }
+
+  .hero::before {
+    height: 44%;
+    left: -40%;
+    right: -40%;
+  }
+
+  .logo-container .brand-lockup,
+  .logo-container .nav-logo {
+    height: 34px;
+  }
+
+  .footer-brand .brand-lockup {
+    height: 38px;
+  }
+
+  .nav-links a {
+    font-size: 0.82rem;
+  }
+}
+
+/* Short laptop viewports (e.g. 1366×768 with browser chrome) — keep the whole
+   hero inside the fold so it fills the screen without internal scrolling */
+@media (max-height: 780px) and (min-width: 769px) {
+  .hero {
+    padding-top: 92px;
+    padding-bottom: 76px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 4.6vw, 3.2rem);
+    margin-bottom: 16px;
+  }
+
+  .hero-badge {
+    margin-bottom: 20px;
+  }
+
+  .hero p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 28px;
+  }
+
+  .scroll-indicator {
+    bottom: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-badge {
+    letter-spacing: 1.4px;
+    font-size: 0.68rem;
+  }
+}
+
+/* Accessibility: freeze the current, keep a static lit state */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
